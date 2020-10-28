@@ -82,6 +82,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.remove(key);
     }
 
+    /**
+     * Marks {@code key} as done.
+     * {@code key} must exist in the task manager.
+     */
     public void doneTask(Task key) {
         key.markDone();
         tasks.setTask(key, key);
