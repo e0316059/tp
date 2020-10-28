@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -103,6 +104,11 @@ public class ModelManager implements Model {
     public void addTask(Task task) {
         taskManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void sortTask(Comparator<Task> comparator) {
+        taskManager.sort(comparator);
     }
 
     @Override

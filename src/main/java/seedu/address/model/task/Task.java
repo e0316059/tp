@@ -134,5 +134,4 @@ public abstract class Task {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

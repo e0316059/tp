@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -122,6 +123,11 @@ public class AddDeadlineCommandTest {
 
         @Override
         public void doneTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortTask(Comparator<Task> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

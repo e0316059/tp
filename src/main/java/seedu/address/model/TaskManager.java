@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -82,6 +83,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.remove(key);
     }
 
+    public void sort(Comparator<Task> comparator) {
+        tasks.sort(comparator);
+    };
+  
     /**
      * Marks {@code key} as done.
      * {@code key} must exist in the task manager.

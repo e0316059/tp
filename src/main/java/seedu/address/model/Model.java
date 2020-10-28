@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -62,6 +63,8 @@ public interface Model {
      * The task must exist in the task manager.
      */
     void deleteTask(Task target);
+
+    void sortTask(Comparator<Task> comparator);
 
     /**
      * Adds the given task.
