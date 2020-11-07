@@ -80,7 +80,7 @@ The `UI` component,
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `TaskManagerParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
 1. The command execution can affect the `Model` (e.g. adding a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ScheDar` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: add a ta's'k**
+**Use case: add a task**
 
 **MSS**
 
@@ -409,6 +409,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 3a1. ScheDar shows an warning message.
 
   Use case ends.
+  
+**Use case: sort tasks according to date**
+
+**MSS**
+
+1. User requests to sort task shown in the list
+2. ScheDar sorts tasks
+
+    Use case ends.
 
 *{More to be added}*
 
