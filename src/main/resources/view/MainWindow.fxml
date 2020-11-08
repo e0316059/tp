@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="ScheDar" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="ScheDar" minWidth="1600" minHeight="800" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/calendar.png" />
   </icons>
@@ -54,12 +54,11 @@
             <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox fx:id="calendar" minWidth="500" prefWidth="500" SplitPane.resizableWithParent="false">
+          <StackPane fx:id="calendarPanelPlaceholder" prefWidth="500" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="calendarPanelPlaceholder" prefWidth="400" VBox.vgrow="ALWAYS"/>
-          </VBox>
+          </StackPane>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
