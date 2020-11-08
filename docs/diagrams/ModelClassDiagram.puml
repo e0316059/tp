@@ -5,23 +5,28 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTaskManager <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class TaskManager
+Class ReadOnlyTaskManager
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-Package Person {
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class UniquePersonList
+Package Task {
+Class "{abstract}\nTask" as Task
+Class Description
+Class DoneStatus
+Class Title
+Class Priority
+Class UniqueTaskList
+Class ToDo
+Class Event
+Class Deadline
+Class TaskDate
+Class TaskTime
 }
 
 Package Tag {
@@ -32,25 +37,33 @@ Class Tag
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+TaskManager .up.|> ReadOnlyTaskManager
 
 ModelManager .up.|> Model
 Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
+ModelManager o--> "1" TaskManager
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList o--> "*" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+TaskManager *--> "1" UniqueTaskList
+UniqueTaskList o--> "*" Task
+Task *--> Title
+Task *--> Priority
+Task *--> DoneStatus
+Task *--> Description
+Task *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ToDo -left-|> Task
+Deadline -left-|> Task
+Event -left-|> Task
 
-ModelManager -->"1" Person : filtered list
+Deadline *-down-> TaskDate
+Event *-down-> TaskDate
+Event *-down-> TaskTime
+
+Title -[hidden]right-> Priority
+Priority -[hidden]right-> Description
+Description -[hidden]right-> DoneStatus
+
+ModelManager -->"1" Task : filtered list
 @enduml

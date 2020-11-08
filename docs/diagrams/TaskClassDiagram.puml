@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Package Task {
+Class "{abstract}\nTask" as Task
+Class ToDo
+Class Deadline
+Class Event
+}
+
+Package Commands {
+Class "{abstract}\nCommand" as Command
+Class AddTodoCommand
+Class AddDeadlineCommand
+Class AddEventCommand
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .down.> Command
+HiddenOutside .down.> Task
+
+ToDo .up.|> Task
+Deadline .up.|> Task
+Event .up.|> Task
+
+AddTodoCommand .up.|> Command
+AddDeadlineCommand .up.|> Command
+AddEventCommand .up.|> Command
+@enduml
