@@ -55,6 +55,13 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the total number of tasks in the list.
+     */
+    public long count() {
+        return internalList.size();
+    }
+
+    /**
      * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing person in the list.

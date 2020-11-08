@@ -46,6 +46,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         setTasks(newData.getTaskList());
     }
 
+    /**
+     * Returns the total number of tasks in the task manager.
+     */
+    public long count() {
+        return tasks.count();
+    }
+
     //// task-level operations
 
     /**

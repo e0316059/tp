@@ -21,8 +21,6 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
 
-    //public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {

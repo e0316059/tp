@@ -110,6 +110,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public long count() {
+        return versionedTaskManager.count();
+    }
+
+    @Override
     public void addTask(Task task) {
         versionedTaskManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);

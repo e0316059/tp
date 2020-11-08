@@ -22,8 +22,6 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Mark task as done: %1$s";
 
-    //public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "Index invalid";
-
     private final Index targetIndex;
 
     public DoneCommand(Index targetIndex) {

@@ -10,6 +10,7 @@ import seedu.schedar.logic.commands.AddDeadlineCommand;
 import seedu.schedar.logic.commands.AddEventCommand;
 import seedu.schedar.logic.commands.AddTodoCommand;
 import seedu.schedar.logic.commands.Command;
+import seedu.schedar.logic.commands.CountCommand;
 import seedu.schedar.logic.commands.DeleteCommand;
 import seedu.schedar.logic.commands.DoneCommand;
 import seedu.schedar.logic.commands.EditDeadlineCommand;
@@ -59,6 +60,9 @@ public class TaskManagerParser {
 
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
+
+        case CountCommand.COMMAND_WORD:
+            return new CountCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
