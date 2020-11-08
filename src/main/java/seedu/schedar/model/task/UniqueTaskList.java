@@ -139,6 +139,15 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the most recently deleted task into the task list {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public Task getRecentDeletedTask() {
+        //requireNonNull(this.recentDeletedTask);
+        return this.recentDeletedTask;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {

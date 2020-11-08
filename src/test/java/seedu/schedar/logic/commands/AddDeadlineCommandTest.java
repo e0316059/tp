@@ -168,6 +168,11 @@ public class AddDeadlineCommandTest {
         }
 
         @Override
+        public Task getRecentDeletedTask() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public long count() {
             throw new AssertionError("This method should not be called.");
         }

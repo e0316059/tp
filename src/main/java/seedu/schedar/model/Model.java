@@ -95,6 +95,8 @@ public interface Model {
 
     void retrieveRecentDeletedTask();
 
+    Task getRecentDeletedTask();
+
     /**
      * Returns the total number of tasks in the task manager.
      */

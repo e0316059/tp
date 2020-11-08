@@ -105,8 +105,14 @@ public class ModelManager implements Model {
         versionedTaskManager.addRecentDeletedTask(task);
     }
 
+    @Override
     public void retrieveRecentDeletedTask() {
         versionedTaskManager.retrieveRecentDeletedTask();
+    }
+
+    @Override
+    public Task getRecentDeletedTask() {
+        return versionedTaskManager.getRecentDeletedTask();
     }
 
     @Override
