@@ -1,5 +1,6 @@
 package seedu.schedar.logic.commands;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.model.Model;
 import seedu.schedar.ui.UiManager;
 
@@ -20,7 +21,7 @@ public class HelpCommand extends Command {
     public HelpCommand() {}
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory history) {
         UiManager.setCommandDescription(commandDescription);
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }

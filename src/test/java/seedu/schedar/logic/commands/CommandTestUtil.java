@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.schedar.commons.core.index.Index;
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.TaskManager;
@@ -65,27 +66,30 @@ public class CommandTestUtil {
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
-     * - the {@code actualModel} matches {@code expectedModel}
+     * - the {@code actualModel} matches {@code expectedModel} <br>
+     * - the {@code actualCommandHistory} remains unchanged.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            CommandResult expectedCommandResult, Model expectedModel) {
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
-            CommandResult result = command.execute(actualModel);
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
+            assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandHistory, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            String expectedMessage, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+        assertCommandSuccess(command, actualModel, actualCommandHistory, expectedCommandResult, expectedModel);
     }
 
     /**
@@ -93,16 +97,21 @@ public class CommandTestUtil {
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the task manager, filtered task list and selected task in {@code actualModel} remain unchanged
+     * - {@code actualCommandHistory} remains unchanged.
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TaskManager expectedTaskManager = new TaskManager(actualModel.getTaskManager());
         List<Task> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTaskList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, actualCommandHistory));
         assertEquals(expectedTaskManager, actualModel.getTaskManager());
         assertEquals(expectedFilteredList, actualModel.getFilteredTaskList());
+        assertEquals(expectedCommandHistory, actualCommandHistory);
     }
     /**
      * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the

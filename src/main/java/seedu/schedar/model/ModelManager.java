@@ -20,12 +20,12 @@ import seedu.schedar.model.task.Task;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private final VersionedTaskManager versionedTaskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given taskManager and userPrefs.
+     * Initializes a ModelManager with the given versionedTaskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -33,9 +33,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.taskManager = new TaskManager(taskManager);
+        this.versionedTaskManager = new VersionedTaskManager(taskManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredTasks = new FilteredList<>(this.versionedTaskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -81,62 +81,62 @@ public class ModelManager implements Model {
 
     @Override
     public void setTaskManager(ReadOnlyTaskManager taskManager) {
-        this.taskManager.resetData(taskManager);
+        this.versionedTaskManager.resetData(taskManager);
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-        return taskManager;
+        return versionedTaskManager;
     }
 
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return taskManager.hasTask(task);
+        return versionedTaskManager.hasTask(task);
     }
 
     @Override
     public void deleteTask(Task target) {
-        taskManager.removeTask(target);
+        versionedTaskManager.removeTask(target);
     }
 
     @Override
     public void addRecentDeletedTask(Task task) {
-        taskManager.addRecentDeletedTask(task);
+        versionedTaskManager.addRecentDeletedTask(task);
     }
 
     public void retrieveRecentDeletedTask() {
-        taskManager.retrieveRecentDeletedTask();
+        versionedTaskManager.retrieveRecentDeletedTask();
     }
 
     @Override
     public void addTask(Task task) {
-        taskManager.addTask(task);
+        versionedTaskManager.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void sortTask(Comparator<Task> comparator) {
-        taskManager.sort(comparator);
+        versionedTaskManager.sort(comparator);
     }
 
     @Override
     public void doneTask(Task task) {
-        taskManager.doneTask(task);
+        versionedTaskManager.doneTask(task);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
-        taskManager.setTask(target, editedTask);
+        versionedTaskManager.setTask(target, editedTask);
     }
 
     //=========== Filtered Task List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedScheDar}
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedTaskManager}
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
@@ -163,9 +163,36 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return taskManager.equals(other.taskManager)
+        return versionedTaskManager.equals(other.versionedTaskManager)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTasks.equals(other.filteredTasks);
+    }
+
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoTaskManager() {
+        return versionedTaskManager.canUndo();
+    }
+
+    @Override
+    public boolean canRedoTaskManager() {
+        return versionedTaskManager.canRedo();
+    }
+
+    @Override
+    public void undoTaskManager() {
+        versionedTaskManager.undo();
+    }
+
+    @Override
+    public void redoTaskManager() {
+        versionedTaskManager.redo();
+    }
+
+    @Override
+    public void commitTaskManager() {
+        versionedTaskManager.commit();
     }
 
 }

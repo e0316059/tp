@@ -19,8 +19,9 @@ import seedu.schedar.logic.commands.ExitCommand;
 import seedu.schedar.logic.commands.FindCommand;
 import seedu.schedar.logic.commands.HelpCommand;
 import seedu.schedar.logic.commands.ListCommand;
-import seedu.schedar.logic.commands.RetrieveCommand;
+import seedu.schedar.logic.commands.RedoCommand;
 import seedu.schedar.logic.commands.SortCommand;
+import seedu.schedar.logic.commands.UndoCommand;
 import seedu.schedar.logic.parser.exceptions.ParseException;
 
 /**
@@ -86,11 +87,14 @@ public class TaskManagerParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case RetrieveCommand.COMMAND_WORD:
-            return new RetrieveCommandParser().parse(arguments);
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

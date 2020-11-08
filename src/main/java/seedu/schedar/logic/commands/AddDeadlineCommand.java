@@ -7,6 +7,7 @@ import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.task.Deadline;
@@ -44,7 +45,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         if (model.hasTask(toAdd)) {

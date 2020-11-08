@@ -2,6 +2,7 @@ package seedu.schedar.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.TaskManager;
 
@@ -15,9 +16,10 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.setTaskManager(new TaskManager());
+        model.commitTaskManager();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

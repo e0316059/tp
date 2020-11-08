@@ -2,6 +2,7 @@ package seedu.schedar.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 
@@ -25,7 +26,7 @@ public class RetrieveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         model.retrieveRecentDeletedTask();

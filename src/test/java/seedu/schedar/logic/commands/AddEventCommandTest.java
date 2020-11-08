@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.schedar.commons.core.GuiSettings;
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.ReadOnlyTaskManager;
@@ -29,6 +30,10 @@ import seedu.schedar.testutil.ToDoBuilder;
 
 public class AddEventCommandTest {
 
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+
+    private CommandHistory commandHistory = new CommandHistory();
+
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
@@ -39,10 +44,11 @@ public class AddEventCommandTest {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validEvent), modelStub.tasksAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -52,7 +58,7 @@ public class AddEventCommandTest {
         ModelStub modelStub = new ModelStubWithTask(validEvent);
 
         assertThrows(CommandException.class, AddEventCommand.MESSAGE_DUPLICATE_TASK, ()
-            -> addEventCommand.execute(modelStub));
+            -> addEventCommand.execute(modelStub, commandHistory));
     }
 
     @Test
@@ -156,6 +162,31 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public boolean canUndoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void sortTask(Comparator<Task> comparator) {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,6 +241,11 @@ public class AddEventCommandTest {
         public void addTask(Task task) {
             requireNonNull(task);
             tasksAdded.add(task);
+        }
+
+        @Override
+        public void commitTaskManager() {
+            // called by {@code AddEventCommand#execute()}
         }
 
         @Override

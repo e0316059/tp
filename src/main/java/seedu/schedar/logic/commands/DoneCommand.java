@@ -6,6 +6,7 @@ import static seedu.schedar.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import java.util.List;
 
 import seedu.schedar.commons.core.index.Index;
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.task.Task;
@@ -29,7 +30,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 

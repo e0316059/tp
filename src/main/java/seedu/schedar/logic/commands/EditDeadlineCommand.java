@@ -15,6 +15,7 @@ import java.util.Set;
 import seedu.schedar.commons.core.Messages;
 import seedu.schedar.commons.core.index.Index;
 import seedu.schedar.commons.util.CollectionUtil;
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.tag.Tag;
@@ -69,7 +70,7 @@ public class EditDeadlineCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 

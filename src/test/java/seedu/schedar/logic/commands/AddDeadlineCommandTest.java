@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.schedar.commons.core.GuiSettings;
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.ReadOnlyTaskManager;
@@ -29,6 +30,10 @@ import seedu.schedar.testutil.ToDoBuilder;
 
 public class AddDeadlineCommandTest {
 
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+
+    private CommandHistory commandHistory = new CommandHistory();
+
     @Test
     public void constructor_nullDeadline_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddDeadlineCommand(null));
@@ -39,11 +44,12 @@ public class AddDeadlineCommandTest {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Deadline validDeadline = new DeadlineBuilder().build();
 
-        CommandResult commandResult = new AddDeadlineCommand(validDeadline).execute(modelStub);
+        CommandResult commandResult = new AddDeadlineCommand(validDeadline).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddDeadlineCommand.MESSAGE_SUCCESS, validDeadline),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validDeadline), modelStub.tasksAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -53,7 +59,7 @@ public class AddDeadlineCommandTest {
         ModelStub modelStub = new ModelStubWithTask(validDeadline);
 
         assertThrows(CommandException.class, AddDeadlineCommand.MESSAGE_DUPLICATE_TASK, ()
-            -> addDeadlineCommand.execute(modelStub));
+            -> addDeadlineCommand.execute(modelStub, commandHistory));
     }
 
     @Test
@@ -162,6 +168,31 @@ public class AddDeadlineCommandTest {
         }
 
         @Override
+        public boolean canUndoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
@@ -211,6 +242,11 @@ public class AddDeadlineCommandTest {
         public void addTask(Task task) {
             requireNonNull(task);
             tasksAdded.add(task);
+        }
+
+        @Override
+        public void commitTaskManager() {
+            // called by {@code AddDeadlineCommand#execute()}
         }
 
         @Override

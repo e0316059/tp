@@ -41,6 +41,31 @@ public interface Model {
     Path getTaskManagerFilePath();
 
     /**
+     * Returns true if the model has previous task manager states to restore.
+     */
+    boolean canUndoTaskManager();
+
+    /**
+     * Returns true if the model has undone task manager states to restore.
+     */
+    boolean canRedoTaskManager();
+
+    /**
+     * Restores the model's task manager to its previous state.
+     */
+    void undoTaskManager();
+
+    /**
+     * Restores the model's task manager to its previously undone state.
+     */
+    void redoTaskManager();
+
+    /**
+     * Saves the current task manager state for undo/redo.
+     */
+    void commitTaskManager();
+
+    /**
      * Sets the user prefs' task manager file path.
      */
     void setTaskManagerFilePath(Path taskManagerFilePath);

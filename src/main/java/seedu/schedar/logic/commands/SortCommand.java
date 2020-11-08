@@ -2,6 +2,7 @@ package seedu.schedar.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.task.TaskDateComparator;
 
@@ -16,7 +17,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "All results sorted";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortTask(new TaskDateComparator());
         return new CommandResult(MESSAGE_DELETE_TASK_SUCCESS);

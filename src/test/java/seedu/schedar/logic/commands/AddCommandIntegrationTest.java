@@ -7,6 +7,7 @@ import static seedu.schedar.testutil.TypicalTasks.getTypicalTaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.model.Model;
 import seedu.schedar.model.ModelManager;
 import seedu.schedar.model.UserPrefs;
@@ -21,6 +22,7 @@ import seedu.schedar.testutil.ToDoBuilder;
 public class AddCommandIntegrationTest {
 
     private Model model;
+    private CommandHistory commandHistory = new CommandHistory();
 
     @BeforeEach
     public void setUp() {
@@ -34,7 +36,7 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getTaskManager(), new UserPrefs());
         expectedModel.addTask(validTodo);
 
-        assertCommandSuccess(new AddTodoCommand(validTodo), model,
+        assertCommandSuccess(new AddTodoCommand(validTodo), model, commandHistory,
                 String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo), expectedModel);
     }
 
@@ -43,7 +45,8 @@ public class AddCommandIntegrationTest {
         Task taskInList = model.getTaskManager().getTaskList().get(0);
 
         // First task in list is of Event Type
-        assertCommandFailure(new AddEventCommand((Event) taskInList), model, AddEventCommand.MESSAGE_DUPLICATE_TASK);
+        assertCommandFailure(new AddEventCommand((Event) taskInList), model, commandHistory,
+                AddEventCommand.MESSAGE_DUPLICATE_TASK);
     }
 
 }
