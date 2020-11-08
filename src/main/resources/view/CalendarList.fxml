@@ -1,30 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane gridLinesVisible="true">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <ListView fx:id="taskListView1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView8" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView9" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView10" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView11" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView12" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView13" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <ListView fx:id="taskListView15" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView16" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView17" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView18" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView19" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView20" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView21" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <ListView fx:id="taskListView22" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView23" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView25" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView26" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView27" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView28" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <ListView fx:id="taskListView29" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView30" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView31" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView32" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView33" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView35" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <ListView fx:id="taskListView36" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView37" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView38" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView39" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView40" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView41" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <ListView fx:id="taskListView42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Sunday">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Monday" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Tuesday" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Wednesday" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Thursday" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Friday" textAlignment="CENTER" GridPane.columnIndex="5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="100.0" text="Saturday" textAlignment="CENTER" GridPane.columnIndex="6">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
       </GridPane>
    </children>
 </VBox>
