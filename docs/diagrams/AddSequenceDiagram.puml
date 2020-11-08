@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskManagerParser" as TaskManagerParser LOGIC_COLOR
+participant ":AddDedlineCommandParser" as AddDeadlineCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "addCommand:AddDeadlineCommand" as AddDeadlineCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "dl:Deadline" as Deadline MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deadline t/taskTitle p/high date/2020-10-11")
+activate LogicManager
+
+LogicManager -> TaskManagerParser : parseCommand("deadline t/taskTitle p/high date/2020-10-11")
+activate TaskManagerParser
+
+create AddDeadlineCommandParser
+TaskManagerParser -> AddDeadlineCommandParser
+activate AddDeadlineCommandParser
+
+AddDeadlineCommandParser --> TaskManagerParser
+deactivate AddDeadlineCommandParser
+
+TaskManagerParser -> AddDeadlineCommandParser : parse("t/taskTitle p/high date/2020-10-11")
+activate AddDeadlineCommandParser
+
+create ArgumentTokenizer
+AddDeadlineCommandParser -> ArgumentTokenizer : tokenize("t/taskTitle p/high date/2020-10-11")
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> AddDeadlineCommandParser : argMultiMap
+deactivate ArgumentTokenizer
+
+create Deadline
+AddDeadlineCommandParser -> Deadline: Deadline(title, description, priority, deadline, tagsList)
+activate Deadline
+
+Deadline -> AddDeadlineCommandParser: dl
+deactivate Deadline
+
+create AddDeadlineCommand
+AddDeadlineCommandParser -> AddDeadlineCommand : AddDeadlineCommand(dl)
+activate AddDeadlineCommand
+
+AddDeadlineCommand --> AddDeadlineCommandParser : addCommand
+deactivate AddDeadlineCommand
+
+AddDeadlineCommandParser --> TaskManagerParser : addCommand
+deactivate AddDeadlineCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddDeadlineCommandParser -[hidden]-> TaskManagerParser
+destroy AddDeadlineCommandParser
+
+TaskManagerParser --> LogicManager : addCommand
+deactivate TaskManagerParser
+
+LogicManager -> AddDeadlineCommand : execute()
+activate AddDeadlineCommand
+
+AddDeadlineCommand -> Model : addTask(dl)
+activate Model
+
+Model --> AddDeadlineCommand
+deactivate Model
+
+create CommandResult
+AddDeadlineCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddDeadlineCommand
+deactivate CommandResult
+
+AddDeadlineCommand --> LogicManager : result
+deactivate AddDeadlineCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
