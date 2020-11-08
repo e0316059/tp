@@ -58,7 +58,7 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="calendarPanelPlaceholder" prefWidth="500" >
+            <StackPane fx:id="calendarPanelPlaceholder" prefWidth="400" VBox.vgrow="ALWAYS"/>
           </VBox>
         </SplitPane>
 
