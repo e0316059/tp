@@ -55,7 +55,6 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-        //assertHistoryCorrect(invalidCommand);
     }
 
     @Test
@@ -63,14 +62,12 @@ public class LogicManagerTest {
         String deleteCommand = "delete 9";
         // Update universal invalid index message
         assertCommandException(deleteCommand, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        //assertHistoryCorrect(deleteCommand);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-        //assertHistoryCorrect(listCommand);
     }
 
     @Test
@@ -93,7 +90,6 @@ public class LogicManagerTest {
         expectedModel.commitTaskManager();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addTodoCommand, CommandException.class, expectedMessage, expectedModel);
-        //assertHistoryCorrect(addTodoCommand);
     }
 
     @Test

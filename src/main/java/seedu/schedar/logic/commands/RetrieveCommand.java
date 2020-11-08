@@ -9,6 +9,7 @@ import seedu.schedar.model.task.Task;
 
 /**
  * Retrieves the recently deleted Task.
+ * Only one task which is the most recently deleted can be retrieved.
  */
 
 public class RetrieveCommand extends Command {
