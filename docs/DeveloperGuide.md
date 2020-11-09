@@ -27,7 +27,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,7 +62,7 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
@@ -78,11 +78,11 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/logic/Logic.java)
 
 1. `Logic` uses the `TaskManagerParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding a task, such as ToDo).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -97,35 +97,28 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the task manager data.
+* exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
-
 
 ### Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103-T16-4/tp/blob/master/src/main/java/seedu/schedar/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the task manager data in json format and read it back.
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.schedar.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,90 +126,62 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Adding Tasks
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+ScheDar supports 3 types of tasks: `ToDo`s, `Deadline`s, and `Event`s. As the 3 types of tasks share many common attributes and features, such as a title, description, and priority level, they all inherit from the abstract class `Task`. Some attributes, like dates, are only relevant to some types of tasks, such as `Deadline`, and are thus not present in the other types such as `ToDo`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Each type of task has it own corresponding command to add that specific type of task. All of the commands extend the `Command` class. Currently, the commands are:
+* `AddTodoCommand` for `ToDo`-type Tasks
+* `AddDeadlineCommand` for `Deadline`-type Tasks
+* `AddEventCommand for `Event`-type Tasks
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+![TaskCommandClass](images/TaskClassDiagram.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+All of the commands extend the `Command` class. However, as each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. 
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Given below is an example for adding a `Deadline`-type task to ScheDar.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 1: The user inputs the command `deadline t/taskTitle p/high date/2020-10-11`, which is supposed to create a `Deadline`-type Task, with a title `taskTitle`, priority `High`, and deadline date of 11 October 2020. Description and tags, which are optional, have been omitted.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2: The input command is passed into `LogicManager` from the UI.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Step 3: `LogicManager` calls on the `parseCommand()` method of `TaskManagerParser` to parse the command. Upon recognising the input as a command to add a `Deadline`-type task, `TaskManagerParser` calls on `AddDeadlineCommandParser` to process the input parameters.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 4: `AddDeadlineCommandParser` calls on the `tokenize` method of `ArgumentTokenizer` to tokenize the commands into an `ArgumentMultiMap`. It then extracts the values for each command parameter, and uses them to create the `Deadline` object.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+Step 5: `AddDeadlineCommandParser` uses the `Deadline` object to create an `AddDeadlineCommand` object, which is returned to `TaskManagerParser`, then `LogicManager` for execution.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 6: `LogicManager` calls on the `execute()` method of the `AddDeadlineCommand` object, which adds the `Deadline` to the ScheDar's task manager.
 
-</div>
+Step 7: Upon successful execution, a `CommandResult` object is created, and returned to `LogicManager` and then the UI, where a success message is displayed to the user.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The following sequence diagram shows how a typical add operation, as explained in steps 2 to 7 above, works:
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+#### Design Considerations
 
-</div>
+##### Aspect: How different Task types are implemented
 
-The following sequence diagram shows how the undo operation works:
+* **Alternative 1 (current choice):** Each type of task is its own class, which inherits from `Task`.
+  * Pros: Allows different types of tasks to have different variables and task-specific behaviour. For example, in future, `Deadline`-type tasks can have reminders, but not `ToDo` or `Event`.
+  * Cons: Managing `Task`s of different classes within the same task manager adds complexity.
+  
+* **Alternative 2:** Have a single `Task` class, with some attributes such as dates, being optional.
+  * Pros: Only a single type of `Task` to manage. Less error prone.
+  * Cons: Difficult to extend or customise behaviour for the different types of tasks.
+  
+##### Aspect: How commands to add different types of tasks are implemented
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 1 (current choice):** Each type of task has its own add command, such as `todo` and `deadline`.
+  * Pros: The parser would be aware of the type of task being added, and can show the user an error message if an invalid parameter is added, such as a date to a `ToDo`-type task.
+  * Cons: There are multiple add commands, and the commands are longer, making the process more inconvenient for users.
+  
+* **Alternative 2:** Have a single `add` command, with the type of task being determined by the attributes supplied by the user, or a separate parameter like `/todo`.
+  * Pros: User only needs to know a single command to add tasks.
+  * Cons: The logic needed to process the command would be more complex, and thus may be more prone to errors.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -241,13 +206,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* seeking an integrated calendar
-* seeking a task management application to plan their schedule
+* seeking an integrated calendar and task management application to plan their schedule
 
-**Value proposition**: A calendar and scheduling application that assists students in the planning of their lecture and tutorial schedules, as well as keep track of assignments and deadlines.
+**Value proposition**: Assist students in the planning of their lecture and tutorial schedules, as well as keep track of assignments and deadlines.
 
 
-### User stories
+### User stories 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
