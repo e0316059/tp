@@ -19,19 +19,19 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=raymond0212)
 
 * **Enhancements to existing features**:
+  * Modify list, exit and help command to make it compatible with ScheDar
   * Updated the GUI icon and title (Pull requests [\#55](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/55))
   * Wrote additional tests for sort and find command
   * Refactor multiple folders and file into 'ScheDar' [\#96](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/96)
-  * Enhance UI.
+  * Enhance UI from AB3 to form current weekly UI component [\#107](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/107).
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `sort` and `find` [\#57](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/57)
   * Developer Guide:
-    * Added implementation details of the `sort` and `find` feature and others. [\#2](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/2)
+    * Added most of use cases and update target user, user stories and value proposition [\#2](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/2)
+    * Added implementation details of the `sort` and `find` feature and others. [\#57](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/57)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * Reported bugs and suggestions for other teams in the class.

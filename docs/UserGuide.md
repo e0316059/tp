@@ -33,6 +33,8 @@ ScheDar is a **desktop app for managing tasks, optimized for use via a Command L
    * **`find`** `cs2103 project`: Searches the current task list for the specified keywords `cs2103 project`.
 
    * **`sort`** : Sorts the current list.
+   
+   * **`undo`** : undo last command
 
    * **`exit`** : Exits the app.
 
