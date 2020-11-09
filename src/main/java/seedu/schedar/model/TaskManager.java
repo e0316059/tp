@@ -124,7 +124,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void doneTask(Task key) {
         key.markDone();
-        tasks.setTask(key, key);
     }
 
     //// util methods

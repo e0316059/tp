@@ -39,6 +39,7 @@ public class DoneCommand extends Command {
 
         Task taskToMarkDone = lastShownList.get(targetIndex.getZeroBased());
         model.doneTask(taskToMarkDone);
+        model.setTask(taskToMarkDone, taskToMarkDone);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.commitTaskManager();
 
