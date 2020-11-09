@@ -41,6 +41,10 @@ public class TaskDateTest {
         assertFalse(TaskDate.isValidDate("2020-DEC-31"));
         assertFalse(TaskDate.isValidDate("2020-1-31"));
         assertFalse(TaskDate.isValidDate("2020-12-1"));
+        assertFalse(TaskDate.isValidDate("2020-02-30"));
+        assertFalse(TaskDate.isValidDate("2020-02-31"));
+        assertFalse(TaskDate.isValidDate("2021-02-29"));
+        assertFalse(TaskDate.isValidDate("2100-02-29"));
 
         // valid dates
         assertTrue(TaskDate.isValidDate("2020-12-31"));
