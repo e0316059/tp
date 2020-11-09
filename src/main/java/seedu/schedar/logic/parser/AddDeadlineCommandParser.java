@@ -7,9 +7,9 @@ import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TASK_TIME;
 import static seedu.schedar.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.schedar.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.schedar.logic.commands.AddDeadlineCommand;
 import seedu.schedar.logic.parser.exceptions.ParseException;
@@ -56,13 +56,5 @@ public class AddDeadlineCommandParser implements Parser<AddDeadlineCommand> {
         Deadline dl = new Deadline(title, description, priority, taskDeadline, tagList);
 
         return new AddDeadlineCommand(dl);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
