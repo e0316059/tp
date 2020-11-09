@@ -130,18 +130,18 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-ScheDar supports 3 types of tasks: `ToDo`s, `Deadline`s, and `Event`s. As the 3 types of tasks share many common attributes and features, such as a title, description, and priority level, they all inherit from the abstract class `Task`. Some attributes, like dates, are only relevant to some types of tasks, such as `Deadline`, and are thus not present in the other types such as `ToDo`.
+ScheDar supports 3 types of tasks: `ToDo`s, `Deadline`s, and `Event`s. As the 3 types of tasks share many common attributes and features, such as a title, description, and priority level, they all inherit from the same abstract class `Task`. Some attributes, like dates, are only relevant to some types of tasks, such as `Deadline`, and are thus not present in the other types such as `ToDo`.
 
 Each type of task has it own corresponding command to add that specific type of task. All of the commands extend the `Command` class. Currently, the commands are:
 * `AddTodoCommand` for `ToDo`-type Tasks
 * `AddDeadlineCommand` for `Deadline`-type Tasks
-* `AddEventCommand for `Event`-type Tasks
+* `AddEventCommand` for `Event`-type Tasks
 
 ![TaskCommandClass](images/TaskClassDiagram.png)
 
-All of the commands extend the `Command` class. However, as each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. 
+All of the commands extend the `Command` class. However, as each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. Thus, each command is given its own class for simplicity and extendability.
 
-Given below is an example for adding a `Deadline`-type task to ScheDar.
+Given below is an example for adding a `Deadline`-type task to ScheDar:
 
 Step 1: The user inputs the command `deadline t/taskTitle p/high date/2020-10-11`, which is supposed to create a `Deadline`-type Task, with a title `taskTitle`, priority `High`, and deadline date of 11 October 2020. Description and tags, which are optional, have been omitted.
 
@@ -168,17 +168,17 @@ The following sequence diagram shows how a typical add operation, as explained i
 * **Alternative 1 (current choice):** Each type of task is its own class, which inherits from `Task`.
   * Pros: Allows different types of tasks to have different variables and task-specific behaviour. For example, in future, `Deadline`-type tasks can have reminders, but not `ToDo` or `Event`.
   * Cons: Managing `Task`s of different classes within the same task manager adds complexity.
-  
+
 * **Alternative 2:** Have a single `Task` class, with some attributes such as dates, being optional.
   * Pros: Only a single type of `Task` to manage. Less error prone.
   * Cons: Difficult to extend or customise behaviour for the different types of tasks.
-  
+
 ##### Aspect: How commands to add different types of tasks are implemented
 
 * **Alternative 1 (current choice):** Each type of task has its own add command, such as `todo` and `deadline`.
   * Pros: The parser would be aware of the type of task being added, and can show the user an error message if an invalid parameter is added, such as a date to a `ToDo`-type task.
   * Cons: There are multiple add commands, and the commands are longer, making the process more inconvenient for users.
-  
+
 * **Alternative 2:** Have a single `add` command, with the type of task being determined by the attributes supplied by the user, or a separate parameter like `/todo`.
   * Pros: User only needs to know a single command to add tasks.
   * Cons: The logic needed to process the command would be more complex, and thus may be more prone to errors.
@@ -292,7 +292,7 @@ The following sequence diagram shows how a typical add operation, as explained i
 **Value proposition**: Assist students in the planning of their lecture and tutorial schedules, as well as keep track of assignments and deadlines.
 
 
-### User stories 
+### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 3a1. ScheDar shows an warning message.
 
   Use case ends.
-  
+
 **Use case: sort tasks according to date**
 
 **MSS**

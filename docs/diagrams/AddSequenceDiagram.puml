@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TaskManagerParser" as TaskManagerParser LOGIC_COLOR
 participant ":AddDeadlineCommandParser" as AddDeadlineCommandParser LOGIC_COLOR
 participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
-participant "addCommand:AddDeadlineCommand" as AddDeadlineCommand LOGIC_COLOR
+participant "addCommand\n:AddDeadlineCommand" as AddDeadlineCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -15,10 +15,10 @@ participant "dl:Deadline" as Deadline MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deadline t/taskTitle p/high date/2020-10-11")
+[-> LogicManager : execute("deadline\nt/taskTitle p/high\ndate/2020-10-11")
 activate LogicManager
 
-LogicManager -> TaskManagerParser : parseCommand("deadline t/taskTitle p/high date/2020-10-11")
+LogicManager -> TaskManagerParser : parseCommand("deadline\nt/taskTitle p/high\ndate/2020-10-11")
 activate TaskManagerParser
 
 create AddDeadlineCommandParser
@@ -28,11 +28,11 @@ activate AddDeadlineCommandParser
 AddDeadlineCommandParser --> TaskManagerParser
 deactivate AddDeadlineCommandParser
 
-TaskManagerParser -> AddDeadlineCommandParser : parse("t/taskTitle p/high date/2020-10-11")
+TaskManagerParser -> AddDeadlineCommandParser : parse("t/taskTitle\np/high date/2020-10-11")
 activate AddDeadlineCommandParser
 
 create ArgumentTokenizer
-AddDeadlineCommandParser -> ArgumentTokenizer : tokenize("t/taskTitle p/high date/2020-10-11")
+AddDeadlineCommandParser -> ArgumentTokenizer : tokenize("t/taskTitle\np/high date/2020-10-11")
 activate ArgumentTokenizer
 
 ArgumentTokenizer --> AddDeadlineCommandParser : argMultiMap

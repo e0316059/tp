@@ -136,7 +136,7 @@ Format: `list`
 
 ### Listing dated items chronologically : `sort`
 
-Lists out deadline-type and event-type tasks currently stored on the task list, in chronological order of date. The earliest deadline or event would be at the top of the list. 
+Lists out deadline-type and event-type tasks currently stored on the task list, in chronological order of date. The earliest deadline or event would be at the top of the list.
 Todo tasks would be move to the bottom of the list.
 
 Format: `sort`
@@ -190,7 +190,7 @@ Examples:
 
 Restores the most recently deleted task.
 
-Format: `retrieve`	
+Format: `retrieve`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The retrieve command should not be called again unless a new deletion has been made.

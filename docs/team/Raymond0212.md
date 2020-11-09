@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to search through tasks. [\#51](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/51)
   * What it does: Allows the user to type multiple keywords and match with description and title
   * Justification: This feature improves the product significantly because a user with many tasks can find the task they want immediately.
-  
+
 * **New Feature**: Added a sorting command that allows users to sort tasks according to time. [\#56](https://github.com/AY2021S1-CS2103-T16-4/tp/pull/56)
   * Justification: This feature improves the product significantly because a user with many tasks can find their most urgent task quickly.
 
