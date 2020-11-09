@@ -18,11 +18,11 @@ import seedu.schedar.model.task.ToDo;
  * Panel containing the list of persons.
  */
 public class SaturdayPanel extends UiPart<Region> {
-    private static final String FXML = "CalendarList.fxml";
+    private static final String FXML = "SaturdayList.fxml";
     private final Logger logger = LogsCenter.getLogger(SundayPanel.class);
 
     @FXML
-    private ListView<Task> taskListView7;
+    private ListView<Task> dailyListView;
 
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
@@ -30,8 +30,8 @@ public class SaturdayPanel extends UiPart<Region> {
     public SaturdayPanel(ObservableList<Task> taskList) {
         super(FXML);
 
-        taskListView7.setItems(taskList);
-        taskListView7.setCellFactory(listView -> new CalendarViewCell());
+        dailyListView.setItems(taskList);
+        dailyListView.setCellFactory(listView -> new CalendarViewCell());
     }
 
     /**
@@ -64,14 +64,19 @@ public class SaturdayPanel extends UiPart<Region> {
 
         @Override
         protected void updateItem(Task task, boolean empty) {
-            super.updateItem(task, empty);
-            if (empty || task == null || !checkTaskDate(task, getDay(6))) {
+            if (task != null && checkTaskDate(task, getDay(6))) {
+                super.updateItem(task, empty);
+                if (empty || task == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new CalendarCard(task).getRoot());
+                }
+            } else {
+                super.updateItem(null, true);
                 setGraphic(null);
                 setText(null);
-            } else {
-                setGraphic(new CalendarCard(task).getRoot());
             }
         }
     }
-
 }
