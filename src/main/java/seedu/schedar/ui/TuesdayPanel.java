@@ -24,15 +24,25 @@ public class TuesdayPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> dailyListView;
 
+    /**
+     * Creates a {@code TuesdayPanel} with the given {@code ObservableList}.
+     */
+    public TuesdayPanel(ObservableList<Task> taskList) {
+        super(FXML);
+
+        dailyListView.setItems(taskList.filtered(x->checkTaskDate(x, getDay(2))));
+        dailyListView.setCellFactory(listView -> new CalendarViewCell());
+    }
+
     private long getDayToday() {
         switch (LocalDate.now().getDayOfWeek().name()) {
-            case "MONDAY": return 1;
-            case "TUESDAY": return 2;
-            case "WEDNESDAY": return 3;
-            case "THURSDAY": return 4;
-            case "FRIDAY": return 5;
-            case "SATURDAY": return 6;
-            default: return 0;
+        case "MONDAY": return 1;
+        case "TUESDAY": return 2;
+        case "WEDNESDAY": return 3;
+        case "THURSDAY": return 4;
+        case "FRIDAY": return 5;
+        case "SATURDAY": return 6;
+        default: return 0;
         }
     }
 
@@ -40,22 +50,14 @@ public class TuesdayPanel extends UiPart<Region> {
         return LocalDate.now().minusDays(getDayToday()).plusDays(day);
     }
 
-    private boolean checkTaskDate(Task task, LocalDate date){
-        if (task instanceof ToDo)
+    private boolean checkTaskDate(Task task, LocalDate date) {
+        if (task instanceof ToDo) {
             return false;
-        if (task instanceof Deadline)
+        }
+        if (task instanceof Deadline) {
             return ((Deadline) task).getDeadlineDate().date.equals(date);
+        }
         return ((Event) task).getEventDate().date.equals(date);
-    }
-
-    /**
-     * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
-     */
-    public TuesdayPanel(ObservableList<Task> taskList) {
-        super(FXML);
-
-        dailyListView.setItems(taskList.filtered(x->checkTaskDate(x, getDay(2))));
-        dailyListView.setCellFactory(listView -> new CalendarViewCell());
     }
 
     /**

@@ -25,32 +25,9 @@ public class SundayPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Task> dailyListView;
-    private long getDayToday() {
-        switch (LocalDate.now().getDayOfWeek().name()) {
-            case "MONDAY": return 1;
-            case "TUESDAY": return 2;
-            case "WEDNESDAY": return 3;
-            case "THURSDAY": return 4;
-            case "FRIDAY": return 5;
-            case "SATURDAY": return 6;
-            default: return 0;
-        }
-    }
-
-    private LocalDate getDay(long day) {
-        return LocalDate.now().minusDays(getDayToday()).plusDays(day);
-    }
-
-    private boolean checkTaskDate(Task task, LocalDate date){
-        if (task instanceof ToDo)
-            return false;
-        if (task instanceof Deadline)
-            return ((Deadline) task).getDeadlineDate().date.equals(date);
-        return ((Event) task).getEventDate().date.equals(date);
-    }
 
     /**
-     * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
+     * Creates a {@code SundayPanel} with the given {@code ObservableList}.
      */
     public SundayPanel(ObservableList<Task> taskList) {
         super(FXML);
@@ -59,6 +36,32 @@ public class SundayPanel extends UiPart<Region> {
 
         dailyListView.setItems(taskList.filtered(x->checkTaskDate(x, getDay(0))));
         dailyListView.setCellFactory(listView -> new CalendarViewCell());
+    }
+
+    private long getDayToday() {
+        switch (LocalDate.now().getDayOfWeek().name()) {
+        case "MONDAY": return 1;
+        case "TUESDAY": return 2;
+        case "WEDNESDAY": return 3;
+        case "THURSDAY": return 4;
+        case "FRIDAY": return 5;
+        case "SATURDAY": return 6;
+        default: return 0;
+        }
+    }
+
+    private LocalDate getDay(long day) {
+        return LocalDate.now().minusDays(getDayToday()).plusDays(day);
+    }
+
+    private boolean checkTaskDate(Task task, LocalDate date) {
+        if (task instanceof ToDo) {
+            return false;
+        }
+        if (task instanceof Deadline) {
+            return ((Deadline) task).getDeadlineDate().date.equals(date);
+        }
+        return ((Event) task).getEventDate().date.equals(date);
     }
 
     /**
