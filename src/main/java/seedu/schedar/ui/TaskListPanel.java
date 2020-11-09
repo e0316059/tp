@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.schedar.commons.core.LogsCenter;
-import seedu.schedar.model.task.Deadline;
 import seedu.schedar.model.task.Task;
 
 /**
