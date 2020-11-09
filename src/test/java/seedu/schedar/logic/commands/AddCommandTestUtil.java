@@ -54,11 +54,6 @@ public class AddCommandTestUtil {
         }
 
         @Override
-        public void doneTask(Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void sortTask(Comparator<Task> comparator) {
             throw new AssertionError("This method should not be called.");
         }
