@@ -108,8 +108,6 @@ public interface Model {
      */
     void addTask(Task task);
 
-    void doneTask(Task task);
-
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the task manager.
