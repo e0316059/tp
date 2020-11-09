@@ -130,18 +130,18 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-ScheDar supports 3 types of tasks: `ToDo`s, `Deadline`s, and `Event`s. As the 3 types of tasks share many common attributes and features, such as a title, description, and priority level, they all inherit from the abstract class `Task`. Some attributes, like dates, are only relevant to some types of tasks, such as `Deadline`, and are thus not present in the other types such as `ToDo`.
+ScheDar supports 3 types of tasks: `ToDo`s, `Deadline`s, and `Event`s. As the 3 types of tasks share many common attributes and features, such as a title, description, and priority level, they all inherit from the same abstract class `Task`. Some attributes, like dates, are only relevant to some types of tasks, such as `Deadline`, and are thus not present in the other types such as `ToDo`.
 
 Each type of task has it own corresponding command to add that specific type of task. All of the commands extend the `Command` class. Currently, the commands are:
 * `AddTodoCommand` for `ToDo`-type Tasks
 * `AddDeadlineCommand` for `Deadline`-type Tasks
-* `AddEventCommand for `Event`-type Tasks
+* `AddEventCommand` for `Event`-type Tasks
 
 ![TaskCommandClass](images/TaskClassDiagram.png)
 
-All of the commands extend the `Command` class. However, as each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. 
+All of the commands extend the `Command` class. However, as each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. Thus, each command is given its own class for simplicity and extendability.
 
-Given below is an example for adding a `Deadline`-type task to ScheDar.
+Given below is an example for adding a `Deadline`-type task to ScheDar:
 
 Step 1: The user inputs the command `deadline t/taskTitle p/high date/2020-10-11`, which is supposed to create a `Deadline`-type Task, with a title `taskTitle`, priority `High`, and deadline date of 11 October 2020. Description and tags, which are optional, have been omitted.
 
