@@ -3,6 +3,7 @@ package seedu.schedar.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.schedar.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +16,7 @@ public class TaskTime {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in the format HH:MM";
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME;
 
     public final LocalTime time;
 
@@ -36,7 +37,7 @@ public class TaskTime {
     public static boolean isValidTime(String test) {
         try {
             LocalTime.parse(test, FORMATTER);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeException e) {
             return false;
         }
         return true;

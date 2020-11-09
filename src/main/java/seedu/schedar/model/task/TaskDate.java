@@ -15,7 +15,7 @@ public class TaskDate implements Comparable<TaskDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the format YYYY-MM-DD";
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
     public final LocalDate date;
 
