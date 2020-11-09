@@ -44,6 +44,7 @@ public class RetrieveCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.retrieveRecentDeletedTask();
+        model.commitTaskManager();
 
         return new CommandResult(MESSAGE_SUCCESS + recentlyDeleted);
     }
