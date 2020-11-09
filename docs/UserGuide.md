@@ -33,6 +33,8 @@ ScheDar is a **desktop app for managing tasks, optimized for use via a Command L
    * **`find`** `cs2103 project`: Searches the current task list for the specified keywords `cs2103 project`.
 
    * **`sort`** : Sorts the current list.
+   
+   * **`undo`** : undo last command
 
    * **`exit`** : Exits the app.
 
@@ -222,7 +224,7 @@ All ScheDar task data are saved on the hard disk automatically after any command
 Action | Format, Examples
 --------|------------------
 **Add Todo** | `todo t/TITLE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `todo t/bake cake d/bake birthday cake for prof p/high tag/important`
-**Add Deadline** | `deadline t/TITLE date/DATE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `deadline t/CS2103 quiz date/2020-10-31 p/high`
+**Add Deadline** | `deadline t/TITLE date/DATE [dz/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `deadline t/CS2103 quiz date/2020-10-31 p/high`
 **Add Event** | `event t/TITLE date/DATE time/TIME [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `event t/project meeting date/2020-10-28 time/18:00 p/high tag/project`
 **Delete** | `delete INDEX`<br> e.g., `delete 1`
 **Done** | `done INDEX`<br> e.g., `done 1`

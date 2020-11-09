@@ -15,6 +15,14 @@ Class TaskListPanel
 Class TaskCard
 Class StatusBarFooter
 Class CommandBox
+Class SaturdayPanel
+Class ClaendarCard
+Class SundayPanel
+Class MondayPanel
+Class TuesdayPanel
+Class ThursdayPanel
+Class FridayPanel
+Class TodoPanel
 }
 
 package Model <<Rectangle>> {
