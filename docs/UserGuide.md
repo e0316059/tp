@@ -141,6 +141,12 @@ Todo tasks would be move to the bottom of the list.
 
 Format: `sort`
 
+### Counts the number of total tasks : `count`
+
+Shows the total number of tasks in the current task list.
+
+Format: `count`
+
 ### Marking task as done : `done`
 
 Marks an existing task on the task list as completed.
@@ -167,8 +173,8 @@ Example: `delete 1`
 
 Edits a task(todo/event/deadline) on the ScheDar program.
 
-Format: `editTodo t/TITLE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`/`editEvent t/TITLE date/DATE time/TIME [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
-        /`editDeadline t/TITLE date/DATE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
+Format: `editTodo [t/TITLE] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`/`editEvent [t/TITLE] [date/DATE] [time/TIME] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
+        /`editDeadline [t/TITLE] [date/DATE] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
         Edits the task of the given type, title, description, priority, date and time, and tag, in the task list.
         The edited task will be placed in the same position as the original task in the task list.
 
@@ -186,6 +192,32 @@ Restores the most recently deleted task.
 
 Format: `retrieve`	
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The retrieve command should not be called again unless a new deletion has been made.
+</div>
+
+### Undo previous command : `undo`
+
+Restores the task list to the state before the previous undoable command was executed.
+Undoable commands: `todo`, `deadline`, `event`, `editTodo`, `editEvent`, `editDeadline`, `delete INDEX`, `retrieve`
+
+Format: `undo`	
+
+Examples:
+`delete 1`
+`list`
+`undo` (reverses the `delete 1` command)
+
+### Redo the previously undone command : `redo`
+
+Reverses the most recent undo command.
+
+Format: `redo`	
+
+Examples:
+`delete 1`
+`undo` (reverses the `delete 1` command)
+`redo` (reapplies the `delete 1` command)
 
 ### Searching for tasks by keyword : `find`
 
@@ -224,12 +256,18 @@ Action | Format, Examples
 **Add Todo** | `todo t/TITLE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `todo t/bake cake d/bake birthday cake for prof p/high tag/important`
 **Add Deadline** | `deadline t/TITLE date/DATE [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `deadline t/CS2103 quiz date/2020-10-31 p/high`
 **Add Event** | `event t/TITLE date/DATE time/TIME [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​` <br> e.g., `event t/project meeting date/2020-10-28 time/18:00 p/high tag/project`
+**Count** | `count`
 **Delete** | `delete INDEX`<br> e.g., `delete 1`
 **Done** | `done INDEX`<br> e.g., `done 1`
+**EditDeadline** | `editDeadline [t/TITLE] [date/DATE] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
+**EditEvent** | `editEvent [t/TITLE] [date/DATE] [time/TIME] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`
+**EditTodo** | `editTodo [t/TITLE] [d/DESCRIPTION] [p/PRIORITY] [tag/TAG]…​`/
 **Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find project meeting`
 **Help** | `help`
 **List** | `list`
+**Redo** | `redo`
 **Retrieve** | `retrieve`
 **Sort** | `sort`
+**Undo** | `undo`
 
