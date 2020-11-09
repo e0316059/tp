@@ -3,9 +3,9 @@ package seedu.schedar.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.schedar.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Task's date in the task manager.
@@ -13,9 +13,10 @@ import java.time.format.DateTimeParseException;
  */
 public class TaskDate implements Comparable<TaskDate> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in the format YYYY-MM-DD";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be a valid date in the format YYYY-MM-DD";
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
     public final LocalDate date;
 
@@ -36,7 +37,7 @@ public class TaskDate implements Comparable<TaskDate> {
     public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, FORMATTER);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeException e) {
             return false;
         }
         return true;
