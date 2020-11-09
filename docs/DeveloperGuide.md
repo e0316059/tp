@@ -182,6 +182,87 @@ The following sequence diagram shows how a typical add operation, as explained i
 * **Alternative 2:** Have a single `add` command, with the type of task being determined by the attributes supplied by the user, or a separate parameter like `/todo`.
   * Pros: User only needs to know a single command to add tasks.
   * Cons: The logic needed to process the command would be more complex, and thus may be more prone to errors.
+  
+### Count Tasks
+
+#### Implementation
+
+ScheDar has the ability to count the number of tasks in current task list.
+
+Given below is an example for counting tasks.
+
+Step 1: The user inputs the command `count`.
+
+Step 2: The input command is passed into `LogicManager` from the UI.
+
+Step 3: `LogicManager` calls on the `parseCommand()` method of `TaskManagerParser` to parse the command. Upon recognising the input as a count command, `TaskManagerParser` calls on `CountCommandParser` to process the input parameters.
+
+Step 4: `CountCommandParser` creates a `CountCommand` object, which is returned to `TaskManagerParser`, then `LogicManager` for execution.
+
+Step 5: `LogicManager` calls on the `execute()` method of the `CountCommand` object, which counts the tasks in ScheDar.
+
+Step 6: Upon successful execution, a `CommandResult` object is created, and returned to `LogicManager` and then the UI, where a success message is displayed to the user.
+
+The following sequence diagram shows how a typical add operation, as explained in steps 2 to 6 above, works:
+
+![CountSequenceDiagram](images/CountSequenceDiagram.png)
+
+#### Design Considerations
+
+##### Aspect: Displays more statistics details to user
+
+* **Alternative 1 (current choice):** Display only the total number of tasks to the user.
+  * Pros: Easier to implement. Less error prone.
+  * Cons: Information displayed to user is limited.
+  
+* **Alternative 2:** Display the total number of tasks as well as the number of tasks of each type (todo/event/deadline), and the number of done/undone tasks. 
+  * Pros: Displays more useful information to the user.
+  * Cons: More error prone.
+  
+* Alternative 1 can be extended to Alternative 2. Due to time limit, we did not implement the extension.
+
+### Editing Tasks
+
+#### Implementation
+
+Similar to add command, each type of task has it own corresponding edit command. All of the commands extend the `Command` class. Currently, the commands are:
+* `EditTodoCommand` for `ToDo`-type Tasks
+* `EditDeadlineCommand` for `Deadline`-type Tasks
+* `EditEventCommand for `Event`-type Tasks
+
+As each type of task stores different types of variables as required (such as date or time), each task may have different command parameters, and thus would need to be parsed differently. 
+
+Given below is an example for editing a `ToDo`-type task.
+
+Step 1: The user inputs the command `editTodo 1 t/project`, which is supposed to edit`ToDo` at index `1` with a new title `project`.
+
+Step 2: The input command is passed into `LogicManager` from the UI.
+
+Step 3: `LogicManager` calls on the `parseCommand()` method of `TaskManagerParser` to parse the command. Upon recognising the input as a command to edit a `ToDo`-type task, `TaskManagerParser` calls on `EditTodoCommandParser` to process the input parameters.
+
+Step 4: `EditTodoCommandParser` calls on the `tokenize` method of `ArgumentTokenizer` to tokenize the commands into an `ArgumentMultiMap`. It then extracts the values for each command parameter, and uses them to create the `EditTodoDescriptor` object.
+
+Step 5: `EditTodoCommandParser` uses the `EditTodoDescriptor` object to create an `EditTodoCommand` object, which is returned to `TaskManagerParser`, then `LogicManager` for execution.
+
+Step 6: `LogicManager` calls on the `execute()` method of the `EditTodoCommand` object, which edits the `ToDo` in the ScheDar's task manager.
+
+Step 7: Upon successful execution, a `CommandResult` object is created, and returned to `LogicManager` and then the UI, where a success message is displayed to the user.
+
+The following sequence diagram shows how a typical add operation, as explained in steps 2 to 7 above, works:
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+#### Design Considerations
+  
+##### Aspect: How commands to edit different types of tasks are implemented
+
+* **Alternative 1 (current choice):** Each type of task has its own edit command.
+  * Pros: The parser would be aware of the type of task being edited, and can show the user an error message if an invalid parameter is edited.
+  * Cons: There are multiple edit commands, and the commands are longer, making the process more inconvenient for users.
+  
+* **Alternative 2:** Have a single `edit` command, with the type of task being determined by its index number provided.
+  * Pros: The command is easier for user.
+  * Cons: The logic needed to process the command would be more complex. More error prone.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -254,6 +335,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters add command specifying task type
 2. ScheDar give a response
+
+    Use case ends.
+    
+**Use case: count the number of tasks**
+
+**MSS**
+
+1. User requests to count the number of tasks in the list
+2. ScheDar count tasks
 
     Use case ends.
 
@@ -353,8 +443,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The rubbish bin is empty.
 
-    * 3a1. ScheDar shows an error message.
+    * 2a1. ScheDar shows an error message.
 
+  Use case ends.
+  
+* 2a. Retrieving the last-deleted task will cause a duplicate of tasks.
+  
+    * 2a1. ScheDar shows an error message.
+  
   Use case ends.
 
 **Use case: search for tasks by keyword**
@@ -380,6 +476,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to sort task shown in the list
 2. ScheDar sorts tasks
+
+    Use case ends.
+    
+**Use case: exit**
+
+**MSS**
+
+1. User requests to exit ScheDar
+2. ScheDar exits
 
     Use case ends.
 

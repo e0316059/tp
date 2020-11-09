@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TaskManagerParser" as TaskManagerParser LOGIC_COLOR
-participant ":AddDedlineCommandParser" as AddDeadlineCommandParser LOGIC_COLOR
+participant ":AddDeadlineCommandParser" as AddDeadlineCommandParser LOGIC_COLOR
 participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
 participant "addCommand:AddDeadlineCommand" as AddDeadlineCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR

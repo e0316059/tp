@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskManagerParser" as TaskManagerParser LOGIC_COLOR
+participant ":CountCommandParser" as CountCommandParser LOGIC_COLOR
+participant "c:CountCommand" as CountCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("count")
+activate LogicManager
+
+LogicManager -> TaskManagerParser : parseCommand("count")
+activate TaskManagerParser
+
+create CountCommandParser
+TaskManagerParser -> CountCommandParser
+activate CountCommandParser
+
+create CountCommand
+CountCommandParser -> CountCommand
+activate CountCommand
+
+CountCommand --> CountCommandParser : c
+deactivate CountCommand
+
+CountCommandParser --> TaskManagerParser : c
+deactivate CountCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CountCommandParser -[hidden]-> TaskManagerParser
+destroy CountCommandParser
+
+TaskManagerParser --> LogicManager : c
+deactivate TaskManagerParser
+
+LogicManager -> CountCommand : execute()
+activate CountCommand
+
+CountCommand -> Model : count()
+activate Model
+
+Model --> CountCommand
+deactivate Model
+
+create CommandResult
+CountCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CountCommand
+deactivate CommandResult
+
+CountCommand --> LogicManager : result
+deactivate CountCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

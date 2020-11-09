@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskManagerParser" as TaskManagerParser LOGIC_COLOR
+participant ":EditTodoCommandParser" as EditTodoCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "editCommand:EditTodoCommand" as EditTodoCommand LOGIC_COLOR
+participant "addTodoCommand:AddTodoCommand" as AddTodoCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "td:ToDo" as ToDo MODEL_COLOR
+participant "ed:EditTodoDescriptor" as EditTodoDescriptor MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editTodo 1 t/project")
+activate LogicManager
+
+LogicManager -> TaskManagerParser : parseCommand("editTodo 1 t/project")
+activate TaskManagerParser
+
+create EditTodoCommandParser
+TaskManagerParser -> EditTodoCommandParser
+activate EditTodoCommandParser
+
+EditTodoCommandParser --> TaskManagerParser
+deactivate EditTodoCommandParser
+
+TaskManagerParser -> EditTodoCommandParser : parse("editTodo 1 t/project")
+activate EditTodoCommandParser
+
+create ArgumentTokenizer
+EditTodoCommandParser -> ArgumentTokenizer : tokenize("1 t/project")
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> EditTodoCommandParser : argMultiMap
+deactivate ArgumentTokenizer
+
+create EditTodoDescriptor
+EditTodoCommandParser -> EditTodoDescriptor: EditTodoDescriptor()
+activate EditTodoDescriptor
+
+EditTodoDescriptor -> EditTodoCommandParser: ed
+deactivate EditTodoDescriptor
+
+create EditTodoCommand
+EditTodoCommandParser -> EditTodoCommand : EditTodoCommand(1, ed)
+activate EditTodoCommand
+
+EditTodoCommand -> Model : getFilteredTaskList().get(1)
+Model -> EditTodoCommand : todo
+
+create ToDo
+EditTodoCommand -> ToDo: CreatedEditedTodo(todo, ed)
+activate ToDo
+
+ToDo --> EditTodoCommand : editTodo
+deactivate Todo
+
+EditTodoCommand --> EditTodoCommandParser : editCommand
+deactivate EditTodoCommand
+
+EditTodoCommandParser --> TaskManagerParser : editCommand
+deactivate EditTodoCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditTodoCommandParser -[hidden]-> TaskManagerParser
+destroy EditTodoCommandParser
+
+TaskManagerParser --> LogicManager : editCommand
+deactivate TaskManagerParser
+
+LogicManager -> EditTodoCommand : execute()
+activate EditTodoCommand
+
+EditTodoCommand -> Model : setTask(todo, editTodo)
+activate Model
+
+Model --> EditTodoCommand
+deactivate Model
+
+create CommandResult
+EditTodoCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditTodoCommand
+deactivate CommandResult
+
+EditTodoCommand --> LogicManager : result
+deactivate EditTodoCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

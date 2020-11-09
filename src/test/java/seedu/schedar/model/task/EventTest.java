@@ -82,6 +82,10 @@ public class EventTest {
         assertFalse(ATTEND.equals(editedAttend));
 
         // different eventTime -> returns false
+        editedAttend = new EventBuilder(ATTEND).withDoneStatus(1).build();
+        assertFalse(ATTEND.equals(editedAttend));
+
+        // different status -> returns false
         editedAttend = new EventBuilder(ATTEND).withEventTime(VALID_TASKTIME_LECTURE).build();
         assertFalse(ATTEND.equals(editedAttend));
 
