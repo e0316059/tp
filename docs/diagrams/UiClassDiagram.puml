@@ -23,6 +23,7 @@ Class TuesdayPanel
 Class ThursdayPanel
 Class FridayPanel
 Class TodoPanel
+Class CalendarCard
 }
 
 package Model <<Rectangle>> {
@@ -54,6 +55,15 @@ TaskListPanel --|> UiPart
 TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
+SaturdayPanel --|> UiPart
+ClaendarCard --|> UiPart
+SundayPanel --|> UiPart
+MondayPanel --|> UiPart
+TuesdayPanel --|> UiPart
+ThursdayPanel --|> UiPart
+FridayPanel --|> UiPart
+TodoPanel --|> UiPart
+CalendarCard --|> UiPart
 
 TaskCard ..> Model
 UiManager -right-> Logic
