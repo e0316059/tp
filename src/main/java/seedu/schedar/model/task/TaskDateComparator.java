@@ -21,10 +21,10 @@ public class TaskDateComparator implements Comparator<Task> {
         if (date1 != null && date2 != null) {
             return date1.compareTo(date2);
         }
-        if (date1 == null) {
-            return 1;
-        } else {
+        if (date2 == null) {
             return -1;
+        } else {
+            return 1;
         }
     }
 }

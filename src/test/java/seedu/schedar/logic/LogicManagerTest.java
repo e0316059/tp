@@ -1,6 +1,7 @@
 package seedu.schedar.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.schedar.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.schedar.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.schedar.logic.commands.CommandTestUtil.DESCRIPTION_DESC_PROJECT;
 import static seedu.schedar.logic.commands.CommandTestUtil.PRIORITY_DESC_PROJECT;
@@ -19,7 +20,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.schedar.logic.commands.AddTodoCommand;
 import seedu.schedar.logic.commands.CommandResult;
-import seedu.schedar.logic.commands.DeleteCommand;
 import seedu.schedar.logic.commands.ListCommand;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.logic.parser.exceptions.ParseException;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         // Update universal invalid index message
-        assertCommandException(deleteCommand, DeleteCommand.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -87,6 +87,7 @@ public class LogicManagerTest {
         ToDo expectedTodo = new ToDoBuilder(TODO_PROJECT).withTags(VALID_TAG_PROJECT).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTodo);
+        expectedModel.commitTaskManager();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addTodoCommand, CommandException.class, expectedMessage, expectedModel);
     }

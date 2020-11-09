@@ -30,7 +30,6 @@ public class VersionedTaskManager extends TaskManager {
         removeStatesAfterCurrentPointer();
         taskManagerStateList.add(new TaskManager(this));
         currentStatePointer++;
-        //indicateModified();
     }
 
     private void removeStatesAfterCurrentPointer() {

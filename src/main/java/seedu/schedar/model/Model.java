@@ -94,6 +94,14 @@ public interface Model {
     void addRecentDeletedTask(Task task);
 
     void retrieveRecentDeletedTask();
+
+    Task getRecentDeletedTask();
+
+    /**
+     * Returns the total number of tasks in the task manager.
+     */
+    long count();
+
     /**
      * Adds the given task.
      * {@code task} must not already exist in the task manager.

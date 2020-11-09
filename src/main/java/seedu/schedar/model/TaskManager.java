@@ -46,6 +46,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         setTasks(newData.getTaskList());
     }
 
+    /**
+     * Returns the total number of tasks in the task manager.
+     */
+    public long count() {
+        return tasks.count();
+    }
+
     //// task-level operations
 
     /**
@@ -98,10 +105,17 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Retrieves the most recently deleted task {@code key} in this {@code TaskManager}.
+     * Retrieves the most recently deleted task in this {@code TaskManager}.
      */
     public void retrieveRecentDeletedTask() {
         tasks.retrieveRecentDeletedTask();
+    }
+
+    /**
+     * Returns the most recently deleted task in this {@code TaskManager}.
+     */
+    public Task getRecentDeletedTask() {
+        return tasks.getRecentDeletedTask();
     }
 
     /**

@@ -20,6 +20,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.sortTask(new TaskDateComparator());
+        model.commitTaskManager();
         return new CommandResult(MESSAGE_DELETE_TASK_SUCCESS);
     }
 }

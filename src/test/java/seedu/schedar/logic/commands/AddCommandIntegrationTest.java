@@ -35,6 +35,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getTaskManager(), new UserPrefs());
         expectedModel.addTask(validTodo);
+        expectedModel.commitTaskManager();
 
         assertCommandSuccess(new AddTodoCommand(validTodo), model, commandHistory,
                 String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo), expectedModel);
