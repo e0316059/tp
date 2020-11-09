@@ -132,11 +132,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void doneTask(Task task) {
-        versionedTaskManager.doneTask(task);
-    }
-
-    @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
