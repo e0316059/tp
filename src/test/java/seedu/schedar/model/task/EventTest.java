@@ -85,10 +85,6 @@ public class EventTest {
         editedAttend = new EventBuilder(ATTEND).withEventTime(VALID_TASKTIME_LECTURE).build();
         assertFalse(ATTEND.equals(editedAttend));
 
-        // different status -> returns false
-        editedAttend = new EventBuilder(ATTEND).withDoneStatus(1).build();
-        assertFalse(ATTEND.equals(editedAttend));
-
         // different tags -> returns false
         editedAttend = new EventBuilder(ATTEND).withTags(VALID_TAG_PROJECT).build();
         assertFalse(ATTEND.equals(editedAttend));

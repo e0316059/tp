@@ -56,6 +56,7 @@ public class AddEventCommand extends Command {
         }
 
         model.addTask(toAdd);
+        model.commitTaskManager();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

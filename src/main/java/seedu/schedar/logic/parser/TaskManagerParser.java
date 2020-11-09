@@ -10,6 +10,7 @@ import seedu.schedar.logic.commands.AddDeadlineCommand;
 import seedu.schedar.logic.commands.AddEventCommand;
 import seedu.schedar.logic.commands.AddTodoCommand;
 import seedu.schedar.logic.commands.Command;
+import seedu.schedar.logic.commands.CountCommand;
 import seedu.schedar.logic.commands.DeleteCommand;
 import seedu.schedar.logic.commands.DoneCommand;
 import seedu.schedar.logic.commands.EditDeadlineCommand;
@@ -20,6 +21,7 @@ import seedu.schedar.logic.commands.FindCommand;
 import seedu.schedar.logic.commands.HelpCommand;
 import seedu.schedar.logic.commands.ListCommand;
 import seedu.schedar.logic.commands.RedoCommand;
+import seedu.schedar.logic.commands.RetrieveCommand;
 import seedu.schedar.logic.commands.SortCommand;
 import seedu.schedar.logic.commands.UndoCommand;
 import seedu.schedar.logic.parser.exceptions.ParseException;
@@ -60,6 +62,9 @@ public class TaskManagerParser {
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
 
+        case CountCommand.COMMAND_WORD:
+            return new CountCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -89,6 +94,9 @@ public class TaskManagerParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
+
+        case RetrieveCommand.COMMAND_WORD:
+            return new RetrieveCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);

@@ -55,6 +55,13 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the total number of tasks in the list.
+     */
+    public long count() {
+        return internalList.size();
+    }
+
+    /**
      * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing person in the list.
@@ -129,6 +136,15 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(this.recentDeletedTask);
+    }
+
+    /**
+     * Returns the most recently deleted task into the task list {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public Task getRecentDeletedTask() {
+        //requireNonNull(this.recentDeletedTask);
+        return this.recentDeletedTask;
     }
 
     /**

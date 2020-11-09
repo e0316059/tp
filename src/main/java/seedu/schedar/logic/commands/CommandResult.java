@@ -68,4 +68,10 @@ public class CommandResult {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
+    //for debug purpose
+    @Override
+    public String toString() {
+        return feedbackToUser;
+    }
+
 }
