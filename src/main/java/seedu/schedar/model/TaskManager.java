@@ -118,14 +118,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.getRecentDeletedTask();
     }
 
-    /**
-     * Marks {@code key} as done in this {@code TaskManager}.
-     * {@code key} must exist in the task manager.
-     */
-    public void doneTask(Task key) {
-        key.markDone();
-    }
-
     //// util methods
 
     @Override

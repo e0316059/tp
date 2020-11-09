@@ -10,7 +10,11 @@ import seedu.schedar.commons.core.index.Index;
 import seedu.schedar.logic.CommandHistory;
 import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
+import seedu.schedar.model.task.Deadline;
+import seedu.schedar.model.task.DoneStatus;
+import seedu.schedar.model.task.Event;
 import seedu.schedar.model.task.Task;
+import seedu.schedar.model.task.ToDo;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
@@ -38,8 +42,41 @@ public class DoneCommand extends Command {
         }
 
         Task taskToMarkDone = lastShownList.get(targetIndex.getZeroBased());
-        model.doneTask(taskToMarkDone);
-        model.setTask(taskToMarkDone, taskToMarkDone);
+        Task taskMarkedDone;
+
+        if (taskToMarkDone instanceof ToDo) {
+            ToDo toDoToMarkDone = (ToDo) taskToMarkDone;
+            taskMarkedDone = new ToDo(
+                    toDoToMarkDone.getTitle(),
+                    toDoToMarkDone.getDescription(),
+                    toDoToMarkDone.getPriority(),
+                    new DoneStatus(1),
+                    toDoToMarkDone.getTags()
+            );
+        } else if (taskToMarkDone instanceof Deadline) {
+            Deadline dlToMarkDone = (Deadline) taskToMarkDone;
+            taskMarkedDone = new Deadline(
+                    dlToMarkDone.getTitle(),
+                    dlToMarkDone.getDescription(),
+                    dlToMarkDone.getPriority(),
+                    dlToMarkDone.getDeadlineDate(),
+                    new DoneStatus(1),
+                    dlToMarkDone.getTags()
+            );
+        } else {
+            Event eventToMarkDone = (Event) taskToMarkDone;
+            taskMarkedDone = new Event(
+                    eventToMarkDone.getTitle(),
+                    eventToMarkDone.getDescription(),
+                    eventToMarkDone.getPriority(),
+                    eventToMarkDone.getEventDate(),
+                    eventToMarkDone.getEventTime(),
+                    new DoneStatus(1),
+                    eventToMarkDone.getTags()
+            );
+        }
+
+        model.setTask(taskToMarkDone, taskMarkedDone);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.commitTaskManager();
 
