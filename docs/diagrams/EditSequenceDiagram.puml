@@ -95,3 +95,5 @@ deactivate EditTodoCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
+
+
