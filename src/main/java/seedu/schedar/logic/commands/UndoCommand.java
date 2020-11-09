@@ -7,7 +7,7 @@ import seedu.schedar.logic.commands.exceptions.CommandException;
 import seedu.schedar.model.Model;
 
 /**
- * Reverts the {@code model}'s address book to its previous state.
+ * Reverts the {@code model}'s task manager to its previous state.
  */
 public class UndoCommand extends Command {
 

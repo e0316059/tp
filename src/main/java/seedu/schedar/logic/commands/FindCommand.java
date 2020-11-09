@@ -31,6 +31,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredTaskList(predicate);
+        model.commitTaskManager();
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredTaskList().size()));
     }

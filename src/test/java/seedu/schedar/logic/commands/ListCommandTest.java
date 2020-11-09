@@ -1,7 +1,7 @@
 package seedu.schedar.logic.commands;
 
 import static seedu.schedar.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.schedar.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.schedar.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.schedar.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.schedar.testutil.TypicalTasks.getTypicalTaskManager;
 
@@ -35,7 +35,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_TASK);
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

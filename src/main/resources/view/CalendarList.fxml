@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox minWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane gridLinesVisible="true" minHeight="400.0" minWidth="1200.0" prefHeight="600.0" prefWidth="2000.0">
+        <columnConstraints>
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints minWidth="100.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="30.0" prefHeight="30.0" />
+            <RowConstraints minHeight="360.0" prefHeight="600.0" />
+        </rowConstraints>
+         <children>
+            <ListView fx:id="taskListView1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <ListView fx:id="taskListView7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ListView fx:id="todoListView8" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Sunday">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Monday" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Tuesday" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Wednesday" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Thursday" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Friday" textAlignment="CENTER" GridPane.columnIndex="5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="Saturday" textAlignment="CENTER" GridPane.columnIndex="6">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="200.0" text="To-Do" textAlignment="CENTER" GridPane.columnIndex="7">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+   </children>
+</VBox>
