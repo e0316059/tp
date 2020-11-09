@@ -14,7 +14,8 @@ import java.time.format.DateTimeParseException;
  */
 public class TaskTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "Time should be in the format HH:MM";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Time should be a valid time between 00:00 and 23:59 in the format HH:MM";
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME;
 

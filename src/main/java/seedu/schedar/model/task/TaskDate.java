@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  */
 public class TaskDate implements Comparable<TaskDate> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in the format YYYY-MM-DD";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be a valid date in the format YYYY-MM-DD";
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
