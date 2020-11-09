@@ -6,7 +6,6 @@ import static seedu.schedar.commons.util.AppUtil.checkArgument;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Task's time in task manager.
