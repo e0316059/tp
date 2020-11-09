@@ -61,3 +61,4 @@ deactivate CountCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
+
