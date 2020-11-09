@@ -72,7 +72,7 @@
             </columnConstraints>
             <rowConstraints>
               <RowConstraints minHeight="30.0" prefHeight="30.0" />
-              <RowConstraints minHeight="360.0" prefHeight="600.0" />
+              <RowConstraints minHeight="360.0" prefHeight="12000.0" />
             </rowConstraints>
             <children>
               <StackPane fx:id="sundayPanelPlaceholder" VBox.vgrow="ALWAYS" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />

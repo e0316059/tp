@@ -1,6 +1,5 @@
 package seedu.schedar.ui;
 
-import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -28,7 +27,7 @@ public class TodoPanel extends UiPart<Region> {
     public TodoPanel(ObservableList<Task> taskList) {
         super(FXML);
 
-        dailyListView.setItems(taskList);
+        dailyListView.setItems(taskList.filtered(x -> x instanceof ToDo));
         dailyListView.setCellFactory(listView -> new CalendarViewCell());
     }
 
@@ -38,18 +37,13 @@ public class TodoPanel extends UiPart<Region> {
     class CalendarViewCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task task, boolean empty) {
-            if (task != null && task instanceof ToDo) {
-                super.updateItem(task, empty);
-                if (empty || task == null) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(new CalendarCard(task).getRoot());
-                }
-            } else {
-                super.updateItem(null, true);
+            super.updateItem(task, empty);
+
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
+            } else {
+                setGraphic(new CalendarCard(task).getRoot());
             }
         }
     }
