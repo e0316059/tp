@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | an efficient student | type abbreviated commands | type super fast |
 | `* *` | a student | see the statistics of my tasks | preview the workload I will encounter in the coming weeks |
 | `* *` | self-consistent NUS student | add task to different task | make my plan well organised |
-| `* *` | a NUS student |  add class schedule by module code |  |
+| `* *` | a well organised student |  see the overview of current week's tasks | plan my days well |
 | `*` | an every day user | receive a warm welcome when I open the app | feel pleased |
 | `*` | a student likes customisation | customise some parts of UI | feel more comfortable when I use it |
 | `*` | a student | set a free day for my timetable by making proper arrangement | have a long weekend |
