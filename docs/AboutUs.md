@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Damith C. Pahapakse
+### Damith C. Rajapakse
 
 <img src="images/johndoe.png" width="200px">
 
@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/raymond0212.png" width="200px">
 
 [[github](https://github.com/Raymond0212)]
-[[portfolio](team/raymond0212.md)]
+[[portfolio](team/Raymond0212.md)]
 
 * Role: Developer
 * Responsibilities: Front-end, Back-end, UI/UX Design
