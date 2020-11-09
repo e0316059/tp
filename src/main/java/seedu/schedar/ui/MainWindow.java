@@ -32,8 +32,13 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
-    private TaskListPanel taskListPanel2;
-    private CalendarPanel calendarPanel;
+    private SundayPanel sundayPanel;
+    private MondayPanel mondayPanel;
+    private TuesdayPanel tuesdayPanel;
+    private WednesdayPanel wednesdayPanel;
+    private ThursdayPanel thursdayPanel;
+    private FridayPanel fridayPanel;
+    private SaturdayPanel saturdayPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -118,11 +123,26 @@ public class MainWindow extends UiPart<Stage> {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-//        taskListPanel2 = new TaskListPanel(logic.getFilteredTaskList());
-//        calendarPanelPlaceholder.getChildren().add(taskListPanel2.getRoot());
+        sundayPanel = new SundayPanel(logic.getFilteredTaskList());
+        calendarPanelPlaceholder.getChildren().add(sundayPanel.getRoot());
 
-        calendarPanel = new CalendarPanel(logic.getFilteredTaskList());
-        calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
+//        mondayPanel = new MondayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(mondayPanel.getRoot());
+//
+//        tuesdayPanel = new TuesdayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(tuesdayPanel.getRoot());
+//
+//        wednesdayPanel = new WednesdayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(wednesdayPanel.getRoot());
+//
+//        thursdayPanel = new ThursdayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(thursdayPanel.getRoot());
+//
+//        fridayPanel = new FridayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(fridayPanel.getRoot());
+//
+//        saturdayPanel = new SaturdayPanel(logic.getFilteredTaskList());
+//        calendarPanelPlaceholder.getChildren().add(saturdayPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
