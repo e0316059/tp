@@ -20,6 +20,10 @@ Given below are my contributions to the project.
   * Refactored close to 4kLOC over the course more than a week.
   * As there were 3 different classes of tasks inheriting from an abstract class `Task`, they had to be handled differently from how AB3 handled the `Person` class. This included ensuring that the different task types could still have their own attributes and behaviours, while still implementing common functions such as marking a task as completed.
   * Refactored test cases to support the new task manager, and the different types of tasks. 
+  
+* **Enhancements to existing feature**: Updated UI to support tasks
+  * Modified the AB3 UI to be able to display the 3 different types of tasks.
+  * (This has since been superseded with a new UI design, though some elements of this initial change were incorporated.)
 
 * **Documentation**:
   * User Guide:
